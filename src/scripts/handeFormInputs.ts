@@ -1,14 +1,14 @@
-import {inputFieldMap} from "./constants.js";
-import inputValidation from "./validation.js";
+import {inputFields} from "./constants.js";
+import inputValidation from "./inputValidation.js";
 import {InputErrorMsg} from "./types";
 
+const submitBtn = document.getElementById('submit') as HTMLInputElement
 
 const setErrorListener = function () {
-  inputFieldMap.forEach((_, fieldId) => {
+  inputFields.forEach((fieldId) => {
     // getting label and input field
     const inputField: HTMLInputElement = document.getElementById(fieldId) as HTMLInputElement;
     const label: HTMLLabelElement = inputField.parentElement as HTMLLabelElement
-    if (!inputField || !label) return
 
     inputField.addEventListener('focusin', (e) => {
       inputField.className = ''
@@ -21,7 +21,6 @@ const setErrorListener = function () {
       updateErrorElement(label, errorMsg)
       updateSubmitBtn();
     })
-
   })
 }
 
@@ -35,10 +34,9 @@ const updateErrorElement = (
 }
 
 const updateSubmitBtn = () => {
-  const submitBtn = document.getElementById('submit') as HTMLInputElement
-  let isSubmitButDisabled = false
-  inputFieldMap.forEach(
-    (_, fieldId) => {
+  let isSubmitButDisabled = false;
+  inputFields.forEach(
+    (fieldId) => {
       const input: HTMLInputElement = document.getElementById(fieldId) as HTMLInputElement
       // all fields must have 'valid' class
       if (input.className !== 'valid') {

@@ -1,3 +1,7 @@
+body {
+    background-color: linen;
+}
+
 form {
     width: 50%;
     margin: 0 auto;
@@ -41,10 +45,22 @@ input::placeholder {
 input[type=submit] {
     width: 30%;
     margin: 10px 5px  0;
-    background-color: linen;
+    background-color: lightgoldenrodyellow;
     color: darkmagenta;
     border: solid 2px darkmagenta;
     border-radius: 10px;
+}
+
+input[type=submit]:disabled {
+    background-color: darkgray;
+}
+
+input[type=submit]:enabled {
+    background-color: lightgoldenrodyellow;
+}
+
+input[type=submit]:enabled:hover {
+    background-color: navajowhite;
 }
 
 input[type=date] {
