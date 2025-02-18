@@ -1,0 +1,58 @@
+form {
+    width: 50%;
+    margin: 0 auto;
+}
+
+label {
+    display: block;
+    margin-left: 5px;
+    width: 100%;
+}
+
+.errorMsg {
+    color: lightcoral;
+    font-style: italic;
+    margin-left: 5px;
+}
+
+input {
+    margin-bottom: 5px;
+    font-family: "Arial", serif;
+    font-size: 1.2em;
+    width: 200px;
+    border-radius: 4px;
+}
+
+input.invalid {
+    border: 2px solid lightcoral;
+}
+
+input.valid {
+    border: 2px solid black;
+}
+
+input::placeholder {
+    color: lightgray;
+    font-style: italic;
+    font-family: "Arial Narrow", serif;
+    font-size: 0.8em;
+}
+
+input[type=submit] {
+    width: 30%;
+    margin: 10px 5px  0;
+    background-color: linen;
+    color: darkmagenta;
+    border: solid 2px darkmagenta;
+    border-radius: 10px;
+}
+
+input[type=date] {
+    font-size: 1em;
+    width: fit-content;
+}
+
+h2 {
+    color: darkmagenta;
+    margin: 10px 20px;
+}

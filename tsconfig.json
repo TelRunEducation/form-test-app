@@ -1,0 +1,26 @@
+{
+//  "compilerOptions": {
+//    "target": "es2016",
+//   // "module": "commonjs",
+//    "module": "ES6",
+//    "esModuleInterop": true,
+//    "forceConsistentCasingInFileNames": true,
+//    "strict": true,
+//    "skipLibCheck": true,
+//    "outDir": "dist"
+//  },
+  "compilerOptions": {
+    "target": "es2016",
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "outDir": "dist"
+  },
+  "include": [
+    "src",
+    "src/**/*.ts"
+  ]
+}
