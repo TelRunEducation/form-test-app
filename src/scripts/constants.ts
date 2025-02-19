@@ -14,3 +14,4 @@ export const nameInvalidCharInputErrorMsg = 'must contain letters and hyphen/spa
 export const wrongDateFormatErrorMsg = 'Incorrect date format'
 export const futureDateInputErrorMsg = 'Future date'
 export const notAdultErrorMsg = 'You are not an adult'
+export const wrongEmailFormatErrorMsg = 'Email address is invalid'

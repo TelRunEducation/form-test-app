@@ -1,4 +1,4 @@
-import {CheckInput, InputErrorMsg} from "./types";
+import {CheckInput, InputErrorMsg} from "./types.js";
 import {
   futureDateInputErrorMsg,
   inputFields,
@@ -7,28 +7,31 @@ import {
   nameInvalidCharInputErrorMsg,
   nameLengthErrorMsg,
   notAdultErrorMsg,
-  wrongDateFormatErrorMsg
+  wrongDateFormatErrorMsg, wrongEmailFormatErrorMsg
 } from "./constants.js";
 
 const inputValidation = (
   fieldId: string,
-  fieldValue: string | null
+  fieldValue: string | null,
+  additionalFieldValue? : string | null
 ): InputErrorMsg => {
   // if by any mistake we're trying to check some other field but from inputFieldMap list
   if (!inputFields.find(id => id === fieldId)) {
     console.warn(fieldId, ': Wrong input check request');
     return null
   }
-  console.log(fieldId + ": " + fieldValue);
   switch (fieldId) {
     case 'first-name': {
-      return createErrorMessage(checkName(fieldValue), 'First name');
+      return createErrorMessage(checkName(fieldValue), 'First name')
     }
     case 'last-name': {
-      return createErrorMessage(checkName(fieldValue), 'Last name');
+      return createErrorMessage(checkName(fieldValue), 'Last name')
     }
     case 'birthdate': {
-      checkBirthDate(fieldValue)
+      return checkBirthDate(fieldValue)
+    }
+    case 'email' : {
+      return checkEmail(fieldValue)
     }
   }
   return null;
@@ -49,21 +52,31 @@ const checkName: CheckInput = (value: string) => {
 
 const checkBirthDate: CheckInput = (dateStr: string) => {
   const dateInMls = Date.parse(dateStr);
+  // check format
   if (isNaN(dateInMls)) {
     return wrongDateFormatErrorMsg;
   }
+  // check that the date is from the past
   if (dateInMls > Date.now()) {
     return futureDateInputErrorMsg
   }
+  // check age
   const dateUnderCheck = new Date(dateInMls)
   const currentYear = new Date().getFullYear();
   let age: number = currentYear - dateUnderCheck.getFullYear()
   dateUnderCheck.setFullYear(currentYear)
   if (dateUnderCheck.valueOf() > Date.now()) {
-    age -=1;
+    age -= 1;
   }
   if (age < 18) {
     return notAdultErrorMsg;
+  }
+  return null
+}
+
+const checkEmail: CheckInput = (value: string) => {
+  if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g.test(value)) {
+    return wrongEmailFormatErrorMsg;
   }
   return null
 }

@@ -1,3 +1,3 @@
-import setErrorListener from "./handeFormInputs.js";
+import {setErrorListener} from "./handeFormInputs.js";
 
 setErrorListener();
