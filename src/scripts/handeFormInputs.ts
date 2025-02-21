@@ -66,11 +66,12 @@ const checkErrorAndUpdateInputElements = (
 const updateSubmitBtn = () => {
   const submitBtn = document.getElementById('submit') as HTMLInputElement
   let isSubmitButDisabled = false;
+  const focusedElemId = document.activeElement?.id
   inputFields.forEach(
     (fieldId: string) => {
-      const elements = getInputElements(fieldId)
+      const elems = getInputElements(fieldId)
       // if input field has errors in it or haven't been checked yet, so className = ''
-      if (!!elements.errorSpan.textContent || elements.input.className === '') {
+      if (elems.errorSpan.textContent || (elems.input.className === '' && elems.input.id !== focusedElemId)) {
         isSubmitButDisabled = true
       }
     })
