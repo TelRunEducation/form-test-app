@@ -1,19 +1,21 @@
 import {CheckInput, InputErrorMsg} from "./types.js";
 import {
+  confirmPasswordErrorMsg,
   futureDateInputErrorMsg,
   inputFields,
   maxNameLength,
   minNameLength,
+  minPasswordLength,
   nameInvalidCharInputErrorMsg,
   nameLengthErrorMsg,
-  notAdultErrorMsg,
-  wrongDateFormatErrorMsg, wrongEmailFormatErrorMsg
+  notAdultErrorMsg, passwordMinLengthErrorMsg,
+  wrongDateFormatErrorMsg, wrongEmailFormatErrorMsg, wrongPasswordFormatErrorMsg,
 } from "./constants.js";
 
 const inputValidation = (
   fieldId: string,
   fieldValue: string | null,
-  additionalFieldValue? : string | null
+  additionalFieldValue?: string | null
 ): InputErrorMsg => {
   // if by any mistake we're trying to check some other field but from inputFieldMap list
   if (!inputFields.find(id => id === fieldId)) {
@@ -21,18 +23,18 @@ const inputValidation = (
     return null
   }
   switch (fieldId) {
-    case 'first-name': {
-      return createErrorMessage(checkName(fieldValue), 'First name')
-    }
-    case 'last-name': {
-      return createErrorMessage(checkName(fieldValue), 'Last name')
-    }
-    case 'birthdate': {
-      return checkBirthDate(fieldValue)
-    }
-    case 'email' : {
-      return checkEmail(fieldValue)
-    }
+    case 'first-name':
+      return createErrorMessage(checkName(fieldValue), 'First name');
+    case 'last-name':
+      return createErrorMessage(checkName(fieldValue), 'Last name');
+    case 'birthdate':
+      return checkBirthDate(fieldValue);
+    case 'email' :
+      return checkEmail(fieldValue);
+    case 'password':
+      return checkPassword(fieldValue);
+    case 'confirm-password':
+      return checkConfirmPassword(fieldValue, additionalFieldValue);
   }
   return null;
 }
@@ -77,6 +79,23 @@ const checkBirthDate: CheckInput = (dateStr: string) => {
 const checkEmail: CheckInput = (value: string) => {
   if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g.test(value)) {
     return wrongEmailFormatErrorMsg;
+  }
+  return null
+}
+
+const checkPassword: CheckInput = (value: string) => {
+  if (value.length < minPasswordLength) {
+    return passwordMinLengthErrorMsg
+  }
+  if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$/.test(value)) {
+    return wrongPasswordFormatErrorMsg
+  }
+  return null
+}
+
+const checkConfirmPassword: CheckInput = (value: string, password: string) => {
+  if (value !== password) {
+    return confirmPasswordErrorMsg
   }
   return null
 }
