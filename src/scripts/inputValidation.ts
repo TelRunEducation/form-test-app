@@ -77,7 +77,7 @@ const checkBirthDate: CheckInput = (dateStr: string) => {
 }
 
 const checkEmail: CheckInput = (value: string) => {
-  if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g.test(value)) {
+  if (!/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g.test(value)) {
     return wrongEmailFormatErrorMsg;
   }
   return null
