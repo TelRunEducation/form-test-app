@@ -1,5 +1,5 @@
-import {inputFields} from "./constants.js";
-import inputValidation from "./inputValidation.js";
+import {inputFields} from "./constants";
+import inputValidation from "./inputValidation";
 import {InputElements, InputErrorMsg} from "./types";
 
 export const setErrorListener = function () {

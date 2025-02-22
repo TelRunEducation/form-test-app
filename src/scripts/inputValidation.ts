@@ -1,4 +1,4 @@
-import {CheckInput, InputErrorMsg} from "./types.js";
+import {CheckInput, InputErrorMsg} from "./types";
 import {
   confirmPasswordErrorMsg,
   futureDateInputErrorMsg,
@@ -10,7 +10,7 @@ import {
   nameLengthErrorMsg,
   notAdultErrorMsg, passwordMinLengthErrorMsg,
   wrongDateFormatErrorMsg, wrongEmailFormatErrorMsg, wrongPasswordFormatErrorMsg,
-} from "./constants.js";
+} from "./constants";
 
 const inputValidation = (
   fieldId: string,
