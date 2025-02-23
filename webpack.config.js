@@ -9,7 +9,7 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
   },
   resolve: {
-    extensions: ['.ts', '.js'],  // Поддерживаемые расширения файлов
+    extensions: ['.ts', '.js', '.css'],  // Поддерживаемые расширения файлов
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -19,8 +19,13 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
+        exclude: /node_modules/,
+      },
+      {
         test: /\.ts$/,  // Применяем для файлов с расширением .ts
-        use: 'ts-loader',  // Используем ts-loader для трансляции TypeScript в JavaScript
+        use: ['ts-loader'],  // Используем ts-loader для трансляции TypeScript в JavaScript
         exclude: /node_modules/,
       },
     ],
@@ -28,7 +33,6 @@ module.exports = {
 
   devServer: {
     static: './dist',  // Папка для статичных файлов
-   // contentBase: path.join(__dirname, 'dist'), // Папка с ресурсами для сервера
     compress: true, // Включение сжатия (gzip)
     port: 9000, // Порт, на котором будет запускаться сервер
     hot: true, // Включение горячей перезагрузки

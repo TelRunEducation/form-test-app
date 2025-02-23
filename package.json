@@ -6,7 +6,8 @@
   "scripts": {
     "build": "webpack --mode development",
     "test": "jest",
-    "start": "webpack serve --open"
+    "start": "webpack serve --open",
+    "integragion-test": "cypress open --component"
   },
   "devDependencies": {
     "@types/jest": "^29.5.14",
